@@ -21,6 +21,25 @@ public:
 
 	UPROPERTY(Category = Pawn, EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* MyMesh;
+
+	UPROPERTY(Category = Pawn, EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UMaterial* SelectMaterial;
+
+	UPROPERTY(Category = Pawn, EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UMaterial* NoneSelectMaterial;
+	
+	void SetHeight(float _Height) {
+		Height = _Height;
+	}
+
+	void Select() {
+		MyMesh->SetMaterial(0, SelectMaterial);
+	}
+
+	void NoneSelect() {
+		MyMesh->SetMaterial(0, NoneSelectMaterial);
+	}
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -28,5 +47,6 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(Category = Pawn, EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	float Height;
 };
