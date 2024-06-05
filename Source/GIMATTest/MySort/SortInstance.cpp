@@ -25,7 +25,21 @@ void USortInstance::SpawnSortingObject()
 
 void USortInstance::Sort(float _DeltaTime)
 {
-	for (uint32 i = 0; i < AllSortObjects.GetTypeSize(); ++i) {
-		AllSortObjects[i]->Select();
+	if (SortTime < 2.f) {
+		SortTime += _DeltaTime;
 	}
+	else {
+		SortTime = 0.f;
+		for (uint16 i = 0; i < Count; ++i) {
+			for (uint16 j = i + 1; j < Count; ++j) {
+				if (AllSortObjects[i]->Height > AllSortObjects[j]->Height) {
+					AllSortObjects[i]->Select();
+					AllSortObjects[j]->Select();
+					AllSortObjects[i]->Swap(AllSortObjects[j]);
+					break;
+				}
+			}
+		}
+	}
+
 }

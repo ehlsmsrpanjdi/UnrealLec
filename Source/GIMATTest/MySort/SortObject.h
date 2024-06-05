@@ -34,10 +34,19 @@ public:
 
 	void Select() {
 		MyMesh->SetMaterial(0, SelectMaterial);
+		Selected = true;
 	}
 
 	void NoneSelect() {
 		MyMesh->SetMaterial(0, NoneSelectMaterial);
+		Selected = false;
+	}
+
+	UFUNCTION(BlueprintCallable)
+	void Swap(ASortObject* _Object) {
+		FVector Temp = _Object->GetActorLocation();
+		_Object->SetActorLocation(GetActorLocation());
+		SetActorLocation(Temp);
 	}
 
 protected:
@@ -49,4 +58,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	UPROPERTY(Category = Pawn, EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	float Height;
+	bool Selected = false;
+	float SelectedTime = 0.f;
 };

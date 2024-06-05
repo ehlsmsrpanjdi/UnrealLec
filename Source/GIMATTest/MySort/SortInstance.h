@@ -25,7 +25,7 @@ public:
 	void Sort(float _DeltaTime);
 private:
 	UPROPERTY(Category = Pawn, EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	TArray<ASortObject*> AllSortObjects = { nullptr ,};
+	TArray<ASortObject*> AllSortObjects;
 
 	UPROPERTY(Category = Pawn, EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<ASortObject> SortObject;
@@ -39,5 +39,6 @@ private:
 	UPROPERTY(Category = Pawn, EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	FVector StartLocation = FVector::Zero();
 
-	float Time;
+	float SortTime = 2.f;
+	uint16 SelectNum = 0;
 };

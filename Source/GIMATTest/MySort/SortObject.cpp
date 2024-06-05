@@ -27,4 +27,11 @@ void ASortObject::BeginPlay()
 void ASortObject::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (true == Selected) {
+		SelectedTime += DeltaTime;
+		if (SelectedTime >= 2.f) {
+			NoneSelect();
+			SelectedTime = 0.f;
+		}
+	}
 }
