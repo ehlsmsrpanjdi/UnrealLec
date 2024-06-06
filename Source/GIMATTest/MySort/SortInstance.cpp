@@ -25,21 +25,41 @@ void USortInstance::SpawnSortingObject()
 
 void USortInstance::Sort(float _DeltaTime)
 {
-	if (SortTime < 2.f) {
+	if (SortEnd == true) {
+		return;
+	}
+	if (SortTime <= 1.f) {
 		SortTime += _DeltaTime;
 	}
 	else {
 		SortTime = 0.f;
-		for (uint16 i = 0; i < Count; ++i) {
-			for (uint16 j = i + 1; j < Count; ++j) {
-				if (AllSortObjects[i]->Height > AllSortObjects[j]->Height) {
-					AllSortObjects[i]->Select();
-					AllSortObjects[j]->Select();
-					AllSortObjects[i]->Swap(AllSortObjects[j]);
-					break;
+		if (FirstBool != true) {
+			FirstBool = true;
+			if (FirstIndex <= Count) {
+				++FirstIndex;
+				AllSortObjects[FirstIndex]->Select();
+			}
+			else {
+				++Loop;
+				FirstIndex = Loop;
+				if (Loop >= Count) {
+					SortEnd = true;
 				}
 			}
 		}
+		else {
+			if (SecondIndex <= Count) {
+				++SecondIndex;
+				AllSortObjects[FirstIndex]->Select();
+				AllSortObjects[SecondIndex]->Select();
+				if (AllSortObjects[SecondIndex]->Height < AllSortObjects[FirstIndex]->Height) {
+					AllSortObjects[SecondIndex]->Swap(AllSortObjects[FirstIndex]);
+				}
+			}
+			else {
+				SecondIndex = Loop + 1;
+				FirstBool = false;
+			}
+		}
 	}
-
 }

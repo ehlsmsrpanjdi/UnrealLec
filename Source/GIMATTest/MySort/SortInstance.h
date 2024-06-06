@@ -39,6 +39,12 @@ private:
 	UPROPERTY(Category = Pawn, EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	FVector StartLocation = FVector::Zero();
 
+	int FirstIndex = 0;
+	bool FirstBool;
+	int SecondIndex = 0;
+	bool SecondBool;
+	int Loop = 0;
+	bool SortEnd = false;
 	float SortTime = 2.f;
 	uint16 SelectNum = 0;
 };

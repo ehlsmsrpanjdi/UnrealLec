@@ -29,7 +29,7 @@ void ASortObject::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (true == Selected) {
 		SelectedTime += DeltaTime;
-		if (SelectedTime >= 2.f) {
+		if (SelectedTime >= 1.f) {
 			NoneSelect();
 			SelectedTime = 0.f;
 		}
