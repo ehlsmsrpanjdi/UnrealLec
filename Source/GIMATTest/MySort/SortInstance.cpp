@@ -28,38 +28,29 @@ void USortInstance::Sort(float _DeltaTime)
 	if (SortEnd == true) {
 		return;
 	}
-	if (SortTime <= 1.f) {
+	if (SortTime <= 0.1f) {
 		SortTime += _DeltaTime;
 	}
 	else {
 		SortTime = 0.f;
-		if (FirstBool != true) {
-			FirstBool = true;
-			if (FirstIndex <= Count) {
-				++FirstIndex;
-				AllSortObjects[FirstIndex]->Select();
-			}
-			else {
-				++Loop;
-				FirstIndex = Loop;
-				if (Loop >= Count) {
-					SortEnd = true;
-				}
-			}
-		}
-		else {
-			if (SecondIndex <= Count) {
-				++SecondIndex;
+			if (SecondIndex <= Count - 1) {
 				AllSortObjects[FirstIndex]->Select();
 				AllSortObjects[SecondIndex]->Select();
 				if (AllSortObjects[SecondIndex]->Height < AllSortObjects[FirstIndex]->Height) {
 					AllSortObjects[SecondIndex]->Swap(AllSortObjects[FirstIndex]);
+					ASortObject* Temp = nullptr;
+					Temp = AllSortObjects[SecondIndex];
+					AllSortObjects[SecondIndex] = AllSortObjects[FirstIndex];
+					AllSortObjects[FirstIndex] = Temp;
 				}
+				++SecondIndex;
 			}
 			else {
-				SecondIndex = Loop + 1;
-				FirstBool = false;
+				++FirstIndex;
+				SecondIndex = FirstIndex + 1;
+				if (FirstIndex == Count - 1) {
+					SortEnd = true;
+				}
 			}
 		}
 	}
-}

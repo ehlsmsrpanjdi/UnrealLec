@@ -41,7 +41,7 @@ private:
 
 	int FirstIndex = 0;
 	bool FirstBool;
-	int SecondIndex = 0;
+	int SecondIndex = 1;
 	bool SecondBool;
 	int Loop = 0;
 	bool SortEnd = false;
